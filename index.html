@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selamat</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }body {
+  background: radial-gradient(circle at top, #111 0%, #000 70%);
+  color: #eaeaea;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.container {
+  z-index: 2;
+  padding: 24px;
+  max-width: 360px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #ffffff;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  min-height: 120px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Typing cursor */
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #aaa;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+  vertical-align: bottom;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Butterfly */
+.butterfly {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, rgba(173,216,255,0.9), rgba(173,216,255,0.2));
+  border-radius: 50% 50% 50% 50%;
+  filter: blur(0.5px);
+  animation: float 12s linear infinite;
+  box-shadow: 0 0 12px rgba(173,216,255,0.8);
+}
+
+@keyframes float {
+  from {
+    transform: translateY(110vh) translateX(0) scale(0.6);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  to {
+    transform: translateY(-20vh) translateX(60px) scale(1);
+    opacity: 0;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Selamat.</h1>
+    <p id="text"></p><span class="cursor"></span>
+  </div>  <!-- Butterflies -->  <div class="butterfly" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="butterfly" style="left: 30%; animation-delay: 3s;"></div>
+  <div class="butterfly" style="left: 55%; animation-delay: 6s;"></div>
+  <div class="butterfly" style="left: 75%; animation-delay: 1.5s;"></div>
+  <div class="butterfly" style="left: 90%; animation-delay: 4.5s;"></div>  <audio id="typeSound" preload="auto">
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-typing-on-keyboard-1386.mp3" type="audio/mpeg">
+  </audio>  <script>
+    const text = "Bukan karena semuanya sudah selesai, tapi karena kamu bertahan dan memilih melangkah lagi. Itu keputusan yang tidak mudah, dan kamu melakukannya.";
+    const target = document.getElementById("text");
+    const sound = document.getElementById("typeSound");
+    let index = 0;
+
+    function typeEffect() {
+      if (index < text.length) {
+        target.innerHTML += text.charAt(index);
+
+        // play sound (reset to avoid overlap bug)
+        sound.currentTime = 0;
+        sound.play().catch(() => {});
+
+        index++;
+        setTimeout(typeEffect, 40);
+      }
+    }
+
+    // delay typing until title finishes
+    setTimeout(typeEffect, 1200);
+  </script></body>
+</html>
